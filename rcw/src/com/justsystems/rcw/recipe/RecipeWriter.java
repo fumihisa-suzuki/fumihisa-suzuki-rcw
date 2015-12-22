@@ -16,7 +16,7 @@ public class RecipeWriter {
 		try (Writer writer = new OutputStreamWriter(new FileOutputStream(filename))){
 			writer.write("ƒIƒ€ƒ‰ƒCƒX");
 		} catch (Exception e) {
-			e.printStackTrace();
+			new RuntimeException(e.getMessage());
 		}
 	}
 	
