@@ -1,6 +1,7 @@
 package com.justsystems.rcw.recipe;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -15,7 +16,7 @@ public class RecipeWriter {
 	public void write() {
 		try (Writer writer = new OutputStreamWriter(new FileOutputStream(filename))){
 			writer.write("ƒIƒ€ƒ‰ƒCƒX");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			new RuntimeException(e.getMessage());
 		}
 	}
