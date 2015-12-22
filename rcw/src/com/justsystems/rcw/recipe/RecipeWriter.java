@@ -11,6 +11,7 @@ import java.io.Writer;
 public class RecipeWriter {
 
 	private String inputFilename;
+
 	private String outputFilename;
 
 	public RecipeWriter(String inputFilename, String outputFilename) {
@@ -19,15 +20,33 @@ public class RecipeWriter {
 	}
 
 	public void write() {
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(inputFilename)));
-				Writer writer = new OutputStreamWriter(new FileOutputStream(
-						outputFilename))) {
+		BufferedReader reader = null;
+		Writer writer = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(
+					new FileInputStream(inputFilename)));
+
+			writer = new OutputStreamWriter(
+					new FileOutputStream(outputFilename));
+
 			for (String line; (line = reader.readLine()) != null;) {
 				writer.write(line);
 			}
 		} catch (IOException e) {
 			new RuntimeException(e.getMessage());
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+				}
+			}
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 	}
 
